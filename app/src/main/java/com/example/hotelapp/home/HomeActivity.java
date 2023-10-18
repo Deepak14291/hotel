@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.ui.AppBarConfiguration;
 
 
@@ -24,10 +25,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-//        Fragment fragment = new MainFragment();
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.fragment_frame, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
-//
+        RoomTypeFragment fragment = new RoomTypeFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
+
 
 
 
