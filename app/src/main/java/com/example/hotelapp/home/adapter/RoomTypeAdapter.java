@@ -3,46 +3,75 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hotelapp.R;
+import com.example.hotelapp.model.RoomType;
 
 import java.util.List;
 
-public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.MyViewHolder> {
+public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomTypeViewHolder> {
 
-    private List<String> dataList; // Replace 'String' with the data type you're displaying.
+    private List<RoomType> roomTypes;
     private Context context;
+    private OnBookClickListener onBookClickListener;
 
-    public RoomTypeAdapter(Context context, List<String> dataList) {
+
+    public RoomTypeAdapter(Context context, List<RoomType> roomTypes, OnBookClickListener onBookClickListener) {
         this.context = context;
-        this.dataList = dataList;
+        this.roomTypes = roomTypes;
+        this.onBookClickListener = onBookClickListener;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_roomtype, parent, false);
-        return new MyViewHolder(view);
+    public RoomTypeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.room_type_item, parent, false);
+        return new RoomTypeViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        String item = dataList.get(position);
-        holder.textView.setText(item);
+    public void onBindViewHolder(RoomTypeViewHolder holder, int position) {
+        RoomType roomType = roomTypes.get(position);
+
+        holder.roomName.setText(roomType.getName());
+        holder.roomPrice.setText(roomType.getPrice());
+        // You would typically use a library like Picasso or Glide to load images from URLs.
+        // For simplicity, we'll just set a placeholder image.
+        holder.roomImage.setImageResource(R.color.brown);
+
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return roomTypes.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+    public class RoomTypeViewHolder extends RecyclerView.ViewHolder {
+        public ImageView roomImage;
+        public TextView roomName;
+        public TextView roomPrice;
 
-        public MyViewHolder(View itemView) {
+        public RoomTypeViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.text);
+            roomImage = itemView.findViewById(R.id.room_image);
+            roomName = itemView.findViewById(R.id.room_name);
+            roomPrice = itemView.findViewById(R.id.room_price);
+            Button bookButton = itemView.findViewById(R.id.book_button);
+            bookButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onBookClickListener != null) {
+                        onBookClickListener.onBookClick(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
+    public interface OnBookClickListener {
+        void onBookClick(int position);
+    }
+
 }

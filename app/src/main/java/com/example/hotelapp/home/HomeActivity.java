@@ -1,13 +1,11 @@
 package com.example.hotelapp.home;
 
 import android.os.Bundle;
-import android.widget.Button;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.AppBarConfiguration;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import com.example.hotelapp.R;
@@ -31,9 +29,12 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
-
     }
-
+    public void switchToSelectedRoomFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, new SelectedRoomFragment());
+        transaction.addToBackStack(null); // Add the transaction to the back stack
+        transaction.commit();
+    }
 
 }
