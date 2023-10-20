@@ -11,7 +11,6 @@
 
     <Button
         android:id="@+id/book_now_button"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -20,7 +19,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="B18E49"
+        android:backgroundTint="#B18E49"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.582"
