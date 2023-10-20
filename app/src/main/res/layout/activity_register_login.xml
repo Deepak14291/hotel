@@ -51,7 +51,8 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:drawableLeft="@drawable/baseline_person_2_24"
-        android:drawablePadding="20dp"/>
+        android:drawablePadding="20dp" />
+
     <EditText
         android:id="@+id/loginpassword"
         android:layout_width="match_parent"
@@ -68,8 +69,8 @@
         android:textColorHint="@color/black"
         android:drawableLeft="@drawable/baseline_lock_person_24"
         android:drawableRight="@drawable/baseline_visibility_24"
-        android:drawablePadding="20dp"/>
-    
+        android:drawablePadding="20dp" />
+
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,13 +79,5 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_centerVertical="true">
-
-    </CheckBox>
-
-
-
-    </TextView>
-
-
+        android:layout_centerVertical="true" />
 </RelativeLayout>
