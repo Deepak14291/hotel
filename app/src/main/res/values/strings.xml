@@ -10,5 +10,23 @@
     <string name="select_dates">Select Dates</string>
     <string name="book_room">Book Room</string>
 
+<!--    Activty_user_landing_page -->
+
+    <string name="welcome_message">Welcome to Mariott Hotel</string>
+    <string name="member_details">Member Details</string>
+
+    <!--    Review Reservation information -->
+    
+    <string name="review_res">Review Reservation</string>
+    <string name="summary_char">Summary of Charges</string>
+
+    <!--    Booking Successful  -->
+    
+    <string name="booking_succ">Booking Successful</string>
+    <string name="thanks_msg">Thank you for your reservation, We look forward to greeting you soon</string>
+    <string name="booking_id"># Booking ID  Stay Details</string>
+
+    <!--    About Hotel app  -->
+    <string name="fitness">Professional personal trainers are at guests’ disposal to offer expert advice and guidance at The Fitness Centre, which is fully equipped with the latest Life Fitness gym equipment, comprehensive free weights, treadmills, cardiovascular equipment and exercise balls. All machines have built-in TV and audio facilities.</string>
 
 </resources>
