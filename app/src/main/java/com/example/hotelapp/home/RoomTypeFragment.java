@@ -35,16 +35,17 @@ public class RoomTypeFragment extends Fragment {
         List<RoomType> dataList = new ArrayList<>();
 
         //setting data
-        dataList.add(new RoomType("room1.jpg", "Standard Room", "$100"));
-        dataList.add(new RoomType("room2.jpg", "Deluxe Room", "$150"));
-        dataList.add(new RoomType("room3.jpg", "Suite", "$250"));
+        dataList.add(new RoomType(R.drawable.roomimage1, "Deluxe Room", "$100"));
+        dataList.add(new RoomType(R.drawable.roomimage3, "Grand Deluxe Room", "$150"));
+        dataList.add(new RoomType(R.drawable.roomimage2, "Executive", "$250"));
 
         RoomTypeAdapter adapter = new RoomTypeAdapter(requireContext(), dataList,new RoomTypeAdapter.OnBookClickListener() {
             @Override
             public void onBookClick(int position) {
                 // Handle the button click for the item at the given position
                 // Implement your logic for booking the room here
-                ((HomeActivity) getActivity()).switchToSelectedRoomFragment();
+               ;
+                ((HomeActivity) getActivity()).switchToSelectedRoomFragment(dataList.get(position));
             }
         });
         recyclerView.setAdapter(adapter);

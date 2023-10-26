@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:text="@string/book_room"
         android:textColor="@color/black"
-        android:backgroundTint="@color/brown"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_gravity="end"
         />
 </LinearLayout>

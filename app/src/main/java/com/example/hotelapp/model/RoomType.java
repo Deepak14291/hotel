@@ -2,16 +2,16 @@ package com.example.hotelapp.model;
 
 public class RoomType {
     // Fields
-    private String img;
+    private int img;
     private String name;
     private String price;
 
     // Getter and Setter methods for 'img'
-    public String getImg() {
+    public int getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(int img) {
         this.img = img;
     }
 
@@ -32,7 +32,7 @@ public class RoomType {
     public void setPrice(String price) {
         this.price = price;
     }
-    public RoomType(String img, String name, String price) {
+    public RoomType(int img, String name, String price) {
         this.img = img;
         this.name = name;
         this.price = price;

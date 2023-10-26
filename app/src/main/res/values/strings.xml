@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hotelapp</string>
+    <string name="app_name">Hotel Reservation</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -28,5 +28,9 @@
 
     <!--    About Hotel app  -->
     <string name="fitness">Professional personal trainers are at guests’ disposal to offer expert advice and guidance at The Fitness Centre, which is fully equipped with the latest Life Fitness gym equipment, comprehensive free weights, treadmills, cardiovascular equipment and exercise balls. All machines have built-in TV and audio facilities.</string>
+
+    <!--    Selected Room-->
+    <string name="selected_date"> Your selected date is</string>
+
 
 </resources>

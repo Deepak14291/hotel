@@ -40,7 +40,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomTy
         holder.roomPrice.setText(roomType.getPrice());
         // You would typically use a library like Picasso or Glide to load images from URLs.
         // For simplicity, we'll just set a placeholder image.
-        holder.roomImage.setImageResource(R.color.brown);
+        holder.roomImage.setImageResource(roomType.getImg());
 
     }
 

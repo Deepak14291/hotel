@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -25,24 +26,22 @@
             android:id="@+id/selected_room_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:gravity="center"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/selected_room_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="16dp"
             android:text="Price"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/tax_included" />
     </LinearLayout>
 
@@ -52,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center"
-        android:backgroundTint="@color/brown"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/select_dates"
         android:textColor="@color/black" />
 
