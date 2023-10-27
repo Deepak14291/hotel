@@ -8,6 +8,48 @@
     android:layout_height="match_parent"
     tools:context=".RegisterLoginActivity">
 
+    <Button
+        android:id="@+id/button_sign_up"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="197dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="362dp"
+        android:backgroundTint="#B18E49"
+        android:text="@string/button_sign_up"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_sign_in2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="196dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="435dp"
+        android:backgroundTint="#B18E49"
+        android:text="@string/sign_in"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/formtitle"
         android:layout_width="match_parent"
@@ -80,4 +122,5 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_centerVertical="true" />
+
 </RelativeLayout>

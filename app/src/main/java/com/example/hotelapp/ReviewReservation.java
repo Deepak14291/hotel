@@ -7,26 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.hotelapp.R;
 
-    private Button button;
+public class ReviewReservation extends AppCompatActivity {
+
+    private Button BookRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_review_reservation);
 
-        button = findViewById(R.id.book_now_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        BookRoom = (Button) findViewById(R.id.button_book_room);
+
+        BookRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegisterLoginActivity.class);
+                Intent intent = new Intent(ReviewReservation.this,BookingSuccessful.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-
-
-    };
+    }
 }
