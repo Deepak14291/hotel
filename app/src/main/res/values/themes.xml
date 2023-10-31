@@ -6,4 +6,16 @@
     </style>
 
     <style name="Theme.Hotelapp" parent="Base.Theme.Hotelapp" />
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize the color of the Toolbar -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- Customize the color of the text and icons in the Toolbar -->
+        <item name="android:textColorPrimary">@color/toolbarText</item>
+        <item name="android:textColorSecondary">@color/toolbarText</item>
+
+        <!-- Customize other attributes as needed -->
+    </style>
+
 </resources>

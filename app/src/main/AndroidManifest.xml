@@ -10,13 +10,38 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Hotelapp"
-        tools:targetApi="31">
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".RegisterLoginActivity"
+            android:name=".Media"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".AboutHotelServices"
+            android:exported="false" />
+        <activity
+            android:name=".MemberDetails"
+            android:exported="false" />
+        <activity
+            android:name=".UserSignUp"
+            android:exported="false" />
+        <activity
+            android:name=".BookingSuccessful"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewReservation"
+            android:exported="false" />
+        <activity
+            android:name=".UserLandingPage"
+            android:exported="false" />
+        <activity
+            android:name=".AboutHotel"
+            android:exported="false" />
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Hotelapp" />
+        <activity
+            android:name=".RegisterLoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
