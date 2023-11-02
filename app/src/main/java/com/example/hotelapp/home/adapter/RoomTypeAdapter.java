@@ -1,4 +1,5 @@
 package com.example.hotelapp.home.adapter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hotelapp.R;
@@ -41,6 +43,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomTy
         // You would typically use a library like Picasso or Glide to load images from URLs.
         // For simplicity, we'll just set a placeholder image.
         holder.roomImage.setImageResource(roomType.getImg());
+        holder.availableRooms.setText("Available Rooms : " + roomType.getAvailableRooms());
 
     }
 
@@ -53,6 +56,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomTy
         public ImageView roomImage;
         public TextView roomName;
         public TextView roomPrice;
+        public TextView availableRooms;
 
         public RoomTypeViewHolder(View itemView) {
             super(itemView);
@@ -60,6 +64,7 @@ public class RoomTypeAdapter extends RecyclerView.Adapter<RoomTypeAdapter.RoomTy
             roomName = itemView.findViewById(R.id.room_name);
             roomPrice = itemView.findViewById(R.id.room_price);
             Button bookButton = itemView.findViewById(R.id.book_button);
+            availableRooms = itemView.findViewById(R.id.available_rooms);
             bookButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -51,5 +51,8 @@
 
     <string name="button_sign_up">Sign-up</string>
     <string name="button_sign_in">Sign-In</string>
+    <string name="taxes">Taxes and Fees \n Estimated</string>
+    <string name="total_price">Total price</string>
+    <string name="reservation_summary">Reservation Summary</string>
 
 </resources>

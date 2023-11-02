@@ -45,7 +45,7 @@ public class UserLandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(UserLandingPage.this, HomeActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
