@@ -1,10 +1,12 @@
 package com.example.hotelapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
@@ -28,6 +30,10 @@ public class Media extends AppCompatActivity {
         String videopath = "android.resource://"+getPackageName()+"/"+R.raw.mariottcommercial;
         Uri uri = Uri.parse(videopath);
         videoView.setVideoPath(uri.toString());
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
@@ -61,7 +67,15 @@ public class Media extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Handle the back button click here
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     public void pauseMusic(){

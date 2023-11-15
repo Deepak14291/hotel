@@ -1,10 +1,9 @@
 package com.example.hotelapp.home;
 
 
-
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+
+import com.example.hotelapp.Constants;
 import com.example.hotelapp.R;
+import com.example.hotelapp.ReviewReservation;
 import com.example.hotelapp.model.RoomType;
 
 
 public class SelectedRoomFragment extends Fragment {
 
-
+    RoomType selectedRoom;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,7 @@ public class SelectedRoomFragment extends Fragment {
         ImageView selectedRoomImage = view.findViewById(R.id.selected_room_image);
         TextView selectedRoomName = view.findViewById(R.id.selected_room_name);
         TextView selectedRoomPrice = view.findViewById(R.id.selected_room_price);
-      RoomType selectedRoom=((HomeActivity) getActivity()).getRoomType();
+        selectedRoom = ((HomeActivity) getActivity()).getRoomType();
         // Set static data
         selectedRoomImage.setImageResource(selectedRoom.getImg()); // Replace with your room's image resource
         selectedRoomName.setText(selectedRoom.getName()); // Replace with the room name
@@ -62,9 +66,14 @@ public class SelectedRoomFragment extends Fragment {
                     @Override
                     public void onDateSet(android.widget.DatePicker datePicker, int year, int month, int day) {
                         // Handle the selected date
-                        String selectedDate =  " "+day+ "-" +(month + 1)+"-"+year+"" ; // Month is 0-based
+                        String selectedDate = " " + day + "-" + (month + 1) + "-" + year + ""; // Month is 0-based
                         // You can use the selected date as needed
-                        Toast.makeText(getContext(),getString(R.string.selected_date)+selectedDate,Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getContext(), getString(R.string.selected_date) + selectedDate, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), ReviewReservation.class);
+                        selectedRoom.setDate(selectedDate);
+                        intent.putExtra(Constants.SELECTED_ROOM_KEY, selectedRoom);
+                        startActivity(intent);
                     }
                 },
                 // Set the initial date in the dialog (optional)
