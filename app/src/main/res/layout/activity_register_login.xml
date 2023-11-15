@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/loginpage"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterLoginActivity">
@@ -60,7 +60,7 @@
         android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:text="Welcome to marriott hotel"
+        android:text="Welcome to Grand View hotel"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="30dp"
