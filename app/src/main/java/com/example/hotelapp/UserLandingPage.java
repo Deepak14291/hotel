@@ -47,7 +47,7 @@ public class UserLandingPage extends AppCompatActivity {
         SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs", MODE_PRIVATE);
 
         String value = getSharedPrefs.getString("fullname", "nothing yet");
-        Name.setText("Hi, " + value.toUpperCase());
+        Name.setText("Hello " + value.toUpperCase()+",");
 
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
