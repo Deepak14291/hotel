@@ -1,8 +1,5 @@
 package com.example.hotelapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,12 +10,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.hotelapp.home.HomeActivity;
 import com.example.hotelapp.location.TrackGPS;
-import com.example.hotelapp.model.RoomType;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,39 +41,23 @@ public class UserLandingPage extends AppCompatActivity {
         BookRoom = (Button) findViewById(R.id.button_book_room);
         MemberDetails = (Button) findViewById(R.id.button_member_details);
         Name = (TextView) findViewById(R.id.user_landing_name);
-        Place=(TextView) findViewById(R.id.textView4);
+        Place = (TextView) findViewById(R.id.textView4);
         Media = (Button) findViewById(R.id.media);
+
+        SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs", MODE_PRIVATE);
+
+        String value = getSharedPrefs.getString("fullname", "nothing yet");
+        Name.setText("Hi, " + value.toUpperCase());
+
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(UserLandingPage.this, mPermission, REQUEST_CODE_PERMISSION);
                 return;
+            } else {
+                getLocation();
             }
         }
-        gps = new TrackGPS(UserLandingPage.this);
-        if (gps.canGetLocation()) {
 
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-            try {
-                List<Address> listAddresses = geocoder.getFromLocation(gps.getLatitude(), gps.getLongitude(), 1);
-                if(null!=listAddresses&&listAddresses.size()>0){
-                    String _Location = listAddresses.get(0).getAddressLine(0);
-                    Place.setText(_Location+"");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-//            editText = (EditText) findViewById(R.id.editTextLatitude);
-//            editText.setText("Latitude: " + gps.getLatitude());
-//            editText = (EditText) findViewById(R.id.editTextLongitude);
-//            editText.setText("Longitude: " + gps.getLongitude());
-//            editText = (EditText) findViewById(R.id.editTextAltitude);
-//            editText.setText("Altitude: "  +gps.getAltitude());
-
-        } else {
-            gps.showAlert();
-        }
 
 
         AboutHotel.setOnClickListener(new View.OnClickListener() {
@@ -113,11 +96,41 @@ public class UserLandingPage extends AppCompatActivity {
             }
         });
 
-        SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs",MODE_PRIVATE);
-
-        String value = getSharedPrefs.getString("fullname", "nothing yet");
-        Name.setText("Hi, "+value.toUpperCase());
-
 
     }
+
+    private void getLocation() {
+        gps = new TrackGPS(UserLandingPage.this);
+        if (gps.canGetLocation()) {
+
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            try {
+                List<Address> listAddresses = geocoder.getFromLocation(gps.getLatitude(), gps.getLongitude(), 1);
+                if (null != listAddresses && listAddresses.size() > 0) {
+                    String _Location = listAddresses.get(0).getAddressLine(0);
+                    Place.setText(_Location + "");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            gps.showAlert();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_CODE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, handle location retrieval here
+                getLocation();
+            } else {
+                // Permission denied, handle accordingly
+            }
+        }
+    }
+
 }
