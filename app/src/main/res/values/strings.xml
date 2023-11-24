@@ -55,4 +55,8 @@
     <string name="total_price">Total price</string>
     <string name="reservation_summary">Reservation Summary</string>
 
+    <!--    New user sign-up Page-->
+    <string name="back_button">Back</string>
+
+
 </resources>

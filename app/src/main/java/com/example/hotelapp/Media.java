@@ -3,6 +3,7 @@ package com.example.hotelapp;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class Media extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
 
     private Button playMusic;
+
+    private Button Back;
 
 
     @Override
@@ -46,6 +49,7 @@ public class Media extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.aboutfood);
 
         playMusic = (Button) findViewById(R.id.button_food);
+        Back = (Button) findViewById(R.id.media_button_back);
 
         playMusic.setOnClickListener(new View.OnClickListener() {
 
@@ -65,8 +69,17 @@ public class Media extends AppCompatActivity {
             }
         });
 
+        Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Media.this,UserLandingPage.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
