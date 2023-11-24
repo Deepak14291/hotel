@@ -34,7 +34,7 @@ public class UserLandingPage extends AppCompatActivity {
         AboutHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserLandingPage.this,AboutHotel.class);
+                Intent intent = new Intent(UserLandingPage.this, AboutHotelServices.class);
                 startActivity(intent);
                 finish();
             }

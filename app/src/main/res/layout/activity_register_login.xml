@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/loginpage"
+    android:background="@drawable/custombg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterLoginActivity">
@@ -18,7 +18,8 @@
         android:layout_marginStart="197dp"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="362dp"
-        android:backgroundTint="#B18E49"
+        android:background="@drawable/signupbutton"
+        android:backgroundTint="@null"
         android:text="@string/button_sign_up"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -39,7 +40,8 @@
         android:layout_marginStart="196dp"
         android:layout_marginEnd="65dp"
         android:layout_marginBottom="435dp"
-        android:backgroundTint="#B18E49"
+        android:background="@drawable/signinbutton"
+        android:backgroundTint="@null"
         android:text="@string/sign_in"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -118,9 +120,14 @@
         android:layout_height="wrap_content"
         android:text="Remember me"
         android:layout_below="@+id/loginpassword"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_centerVertical="true" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:minHeight="48dp"
+    android:minWidth="48dp"
+    android:layout_gravity="center_vertical" />
+
+
 
 </RelativeLayout>

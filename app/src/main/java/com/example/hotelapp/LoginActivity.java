@@ -28,5 +28,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    };
+    }
+    public void setContentView(int activityLogin) {
+    }
+
+    ;
 }
