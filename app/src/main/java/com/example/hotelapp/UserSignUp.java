@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class UserSignUp extends AppCompatActivity {
 
-    String MESSAGE_ID = "message_prefs";
+
     private Button SignUp, SignIn;
     private EditText Fullname;
     private EditText Username;
@@ -72,14 +72,16 @@ public class UserSignUp extends AppCompatActivity {
                 }
 
                 else{
-                    SharedPreferences sharedPreferences = getSharedPreferences(MESSAGE_ID,MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences(Constants.MESSAGE_ID,MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("fullname", fullname);
-                    editor.putString("username", username);
-                    editor.putString("password", password);
-                    editor.putString("email", email);
-                    editor.putString("phone", phone);
-
+                    editor.putString(Constants.FULLNAME, fullname);
+                    editor.putString(Constants.USERNAME, username);
+                    editor.putString(Constants.PASSWORD, password);
+                    editor.putString(Constants.EMAIL, email);
+                    editor.putString(Constants.PHONE, phone);
+                    editor.putInt(Constants.DELUXE_ROOM, 4);
+                    editor.putInt(Constants.GRAND_DELUXE,4);
+                    editor.putInt(Constants.EXECUTIVE, 4);
                     editor.commit(); // saving to disk.
                     Toast.makeText(UserSignUp.this,"Congratulations!!! Sign-up success", Toast.LENGTH_SHORT)
                             .show();

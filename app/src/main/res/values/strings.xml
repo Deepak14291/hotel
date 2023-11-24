@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hotel Reservation</string>
+    <string name="app_name">GrandView Hotel</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -16,7 +16,7 @@
 
     <!--    Activty_user_landing_page -->
 
-    <string name="welcome_message">Welcome to Mariott Hotel</string>
+    <string name="welcome_message">Welcome to GrandView Hotel,</string>
     <string name="member_details">Member Details</string>
     <string name="button_media">Media</string>
 
@@ -51,5 +51,8 @@
 
     <string name="button_sign_up">Sign-up</string>
     <string name="button_sign_in">Sign-In</string>
+    <string name="taxes">Taxes and Fees \n Estimated</string>
+    <string name="total_price">Total price</string>
+    <string name="reservation_summary">Reservation Summary</string>
 
 </resources>

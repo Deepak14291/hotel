@@ -29,6 +29,13 @@
         android:textSize="16sp"
         android:textColor="#333" />
     <TextView
+        android:id="@+id/available_rooms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Available rooms :4"
+        android:textSize="16sp"
+        android:textColor="#333" />
+    <TextView
         android:layout_width="match_parent"
         android:text="@string/tax_included"
         android:layout_height="wrap_content"/>

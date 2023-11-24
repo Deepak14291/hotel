@@ -1,8 +1,10 @@
 package com.example.hotelapp.home;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -25,7 +27,10 @@ private RoomType roomType;
         RoomTypeFragment fragment = new RoomTypeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
 
     }
@@ -46,5 +51,17 @@ private RoomType roomType;
         transaction.addToBackStack(null); // Add the transaction to the back stack
         transaction.commit();
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            // The back stack is empty, so finish the activity
+            finish();
+            return true;
+        } else {
+            super.onBackPressed();
+            return true;
+        }
 
+
+    }
 }

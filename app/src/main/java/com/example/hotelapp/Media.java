@@ -1,9 +1,11 @@
 package com.example.hotelapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
@@ -55,18 +57,32 @@ public class Media extends AppCompatActivity {
         playMusic = findViewById(R.id.button_food);
 
         playMusic.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if (mediaPlayer.isPlaying()) {
-                    // Stop and give option to start again
+
+                if (mediaPlayer.isPlaying()){
+
+                    //stop and give option to start again
                     pauseMusic();
-                } else {
-                    // Start and give option to pause again
+                }else {
+
+                    //Start and give option to pause again
                     startMusic();
                 }
             }
         });
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Handle the back button click here
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void pauseMusic() {
         if (mediaPlayer != null) {
