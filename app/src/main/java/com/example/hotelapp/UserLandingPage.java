@@ -95,8 +95,6 @@ public class UserLandingPage extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
     private void getLocation() {
