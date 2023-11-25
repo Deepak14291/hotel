@@ -55,8 +55,6 @@ public class RoomTypeFragment extends Fragment {
         });
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
         return view;
     }
-
 }

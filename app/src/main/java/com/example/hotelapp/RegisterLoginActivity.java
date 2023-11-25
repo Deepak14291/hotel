@@ -43,7 +43,7 @@ public class RegisterLoginActivity extends AppCompatActivity {
                 String username_saved = getSharedPrefs.getString("username", "nothing yet");
                 String password_saved = getSharedPrefs.getString("password", "nothing yet");
 
-
+                // if username and password is empty, display a toast notification to request user input.
                 if(username.isEmpty()){
                     Toast.makeText(RegisterLoginActivity.this, "please enter username", Toast.LENGTH_SHORT)
                             .show();
@@ -52,6 +52,8 @@ public class RegisterLoginActivity extends AppCompatActivity {
                             .show();
 
                 }else {
+                    // if username and password is provided by the user, check against the stored shared preference.
+                    // If it matches navigate to user landing page, if not, display a toast message saying incorrect credentials entered.
                     if( (username.matches(username_saved)) && (password.matches(password_saved))){
                         //Proceed to user landing page
                         Intent intent = new Intent(RegisterLoginActivity.this,UserLandingPage.class);
@@ -66,7 +68,7 @@ public class RegisterLoginActivity extends AppCompatActivity {
 
             }
         });
-
+        // Navigate to usersignup page on click of sign-up button.
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
