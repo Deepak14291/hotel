@@ -4,9 +4,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,9 +51,12 @@ public class RoomTypeFragment extends Fragment {
         dataList.add(new RoomType(R.drawable.roomimage2, "Executive", "$250", "", availExecutiveRooms));
 
         // Create an adapter and set it to the RecyclerView
-        RoomTypeAdapter adapter = new RoomTypeAdapter(requireContext(), dataList, new RoomTypeAdapter.OnBookClickListener() {
-            @Override
-            public void onBookClick(int position) {
+        RoomTypeAdapter adapter = new RoomTypeAdapter(requireContext(), dataList, position -> {
+
+            if(position==0 &&availDeluxeRooms<=0||position==1 && availGrandRooms<=0 || position==2 && availExecutiveRooms<=0){
+                Toast.makeText(requireContext(), "Room not available", Toast.LENGTH_SHORT).show();
+            }
+            else{
                 // Handle the button click for the item at the given position
                 // Implement your logic for booking the room here
                 ((HomeActivity) getActivity()).switchToSelectedRoomFragment(dataList.get(position));
