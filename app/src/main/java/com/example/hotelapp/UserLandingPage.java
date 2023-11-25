@@ -6,100 +6,76 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.example.hotelapp.home.HomeActivity;
 import com.example.hotelapp.location.TrackGPS;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class UserLandingPage extends AppCompatActivity {
     private static final int REQUEST_CODE_PERMISSION = 1;
-    private Button AboutHotel;
-    private Button MemberDetails;
-    private Button BookRoom;
-    private TextView Name, Place;
+    private TextView Place;
     String[] mPermission = {Manifest.permission.ACCESS_FINE_LOCATION};
-    private Button Media;
-    private TrackGPS gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_landing_page);
 
-        AboutHotel = (Button) findViewById(R.id.about_hotel);
-        BookRoom = (Button) findViewById(R.id.button_book_room);
-        MemberDetails = (Button) findViewById(R.id.button_member_details);
-        Name = (TextView) findViewById(R.id.user_landing_name);
+        Button aboutHotel = (Button) findViewById(R.id.about_hotel);
+        Button bookRoom = (Button) findViewById(R.id.button_book_room);
+        Button memberDetails = (Button) findViewById(R.id.button_member_details);
+        TextView name = (TextView) findViewById(R.id.user_landing_name);
         Place = (TextView) findViewById(R.id.textView4);
-        Media = (Button) findViewById(R.id.media);
+        Button media = (Button) findViewById(R.id.media);
 
         SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs", MODE_PRIVATE);
 
         String value = getSharedPrefs.getString("fullname", "nothing yet");
-        Name.setText("Hello " + value.toUpperCase() + ",");
+        name.setText("Hello " + value.toUpperCase() + ",");
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(UserLandingPage.this, mPermission, REQUEST_CODE_PERMISSION);
-                return;
-            } else {
-                getLocation();
-            }
+        if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(UserLandingPage.this, mPermission, REQUEST_CODE_PERMISSION);
+            return;
+        } else {
+            getLocation();
         }
 
 
-        AboutHotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserLandingPage.this, AboutHotelServices.class);
-                startActivity(intent);
+        aboutHotel.setOnClickListener(v -> {
+            Intent intent = new Intent(UserLandingPage.this, AboutHotelServices.class);
+            startActivity(intent);
 
-            }
         });
 
-        BookRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserLandingPage.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        bookRoom.setOnClickListener(v -> {
+            Intent intent = new Intent(UserLandingPage.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        MemberDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserLandingPage.this, MemberDetails.class);
-                startActivity(intent);
+        memberDetails.setOnClickListener(v -> {
+            Intent intent = new Intent(UserLandingPage.this, MemberDetails.class);
+            startActivity(intent);
 
-            }
         });
 
-        Media.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserLandingPage.this, Media.class);
-                startActivity(intent);
+        media.setOnClickListener(v -> {
+            Intent intent = new Intent(UserLandingPage.this, Media.class);
+            startActivity(intent);
 
-            }
         });
     }
 
     private void getLocation() {
-        gps = new TrackGPS(UserLandingPage.this);
+        TrackGPS gps = new TrackGPS(UserLandingPage.this);
         if (gps.canGetLocation()) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
@@ -137,6 +113,11 @@ public class UserLandingPage extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
 
     private void showPermissionDeniedMessage() {
         // Display a message to the user explaining why the location permission is essential

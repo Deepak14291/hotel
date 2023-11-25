@@ -16,72 +16,65 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
 public class TrackGPS extends Service implements LocationListener {
-    private final Context ctxt; // reference to current Activity
-    boolean checkGPS = false; // check if GPS is available
-    Location mylocation; // variable to store current location
-    protected LocationManager locationManager;
-    double latitude;
-    double longitude;
-    double altitude;
-    private static final long MINDELAY = 1000 * 60; // minimum time between updates
-    private static final long MINDISTANCE = 10; // minimum distance between updates
-    public double getLatitude(){
-        if (mylocation != null) return mylocation.getLatitude();
-        return latitude;
+
+    private final Context context; // Reference to the current context
+    private boolean isGPSEnabled = false; // Flag to check if GPS is available
+    private Location myLocation; // Variable to store the current location
+    private LocationManager locationManager;
+    private double latitude;
+    private double longitude;
+
+    private static final long MIN_DELAY = 1000 * 60; // Minimum time between updates
+    private static final long MIN_DISTANCE = 10; // Minimum distance between updates
+
+    public TrackGPS(Context context) {
+        this.context = context;
+        getLocation();
     }
 
-    public double getLongitude(){
-        if (mylocation != null) return mylocation.getLongitude();
-        return longitude;
+    public double getLatitude() {
+        return (myLocation != null) ? myLocation.getLatitude() : latitude;
     }
-    private Location getLocation(){
-        try{
-            locationManager = (LocationManager) ctxt.getSystemService(LOCATION_SERVICE);
-            // get GPS status
-            checkGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            if (checkGPS){
+
+    public double getLongitude() {
+        return (myLocation != null) ? myLocation.getLongitude() : longitude;
+    }
+
+    private Location getLocation() {
+        try {
+            locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
+            // Get GPS status
+            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+            if (isGPSEnabled) {
                 try {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINDELAY, MINDISTANCE, this);
-                    if (locationManager != null){
-                        mylocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        if (mylocation != null){
-                            latitude = mylocation.getLatitude();
-                            longitude = mylocation.getLongitude();
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_DELAY, MIN_DISTANCE, this);
+                    if (locationManager != null) {
+                        myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        if (myLocation != null) {
+                            latitude = myLocation.getLatitude();
+                            longitude = myLocation.getLongitude();
                         }
                     }
                 } catch (SecurityException e) {
-                    Toast.makeText(ctxt, "No permission to access GPS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "No permission to access GPS", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else {
-                Toast.makeText(ctxt, "No service provider available", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "No service provider available", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mylocation;
-    }
-    public TrackGPS(Context ctxt){
-        this.ctxt = ctxt;
-        getLocation();
+        return myLocation;
     }
 
-
-
-
-    public double getAltitude(){
-        if (mylocation != null) return mylocation.getAltitude();
-        return altitude;
-    }
-
-    public boolean canGetLocation(){
-        return this.checkGPS;
+    public boolean canGetLocation() {
+        return isGPSEnabled;
     }
 
     public void showAlert() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(ctxt);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setTitle("GPS disabled");
         dialog.setMessage("Do you want to turn on GPS?");
         dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -89,10 +82,10 @@ public class TrackGPS extends Service implements LocationListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                ctxt.startActivity(intent);
+                context.startActivity(intent);
             }
         });
-        dialog.setNegativeButton("NO",new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -102,13 +95,13 @@ public class TrackGPS extends Service implements LocationListener {
         dialog.show();
     }
 
-    //Stops the use of GPS
+    // Stops the use of GPS
     public void stopGPS() {
         if (locationManager != null) {
             try {
                 locationManager.removeUpdates(TrackGPS.this);
             } catch (SecurityException e) {
-                Toast.makeText(ctxt, "No permission to access GPS", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No permission to access GPS", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -121,10 +114,11 @@ public class TrackGPS extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-
-    }
-    public void onStatusChanged(String provider, int status, Bundle extras){
-
+        // Handle location changes if needed
     }
 
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        // Handle status changes if needed
+    }
 }

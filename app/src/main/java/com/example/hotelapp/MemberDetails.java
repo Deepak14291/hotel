@@ -1,9 +1,7 @@
 package com.example.hotelapp;
 
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,40 +23,45 @@ public class MemberDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_details);
+
+        // Set up action bar with back button
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        Fullname = (TextView) findViewById(R.id.memberdetails_fullname);
-        Username = (TextView) findViewById(R.id.memberdetails_username);
-        Email = (TextView) findViewById(R.id.memberdetails_email);
-        PhoneNumber = (TextView) findViewById(R.id.memberdetails_phone);
-        Back = (Button) findViewById(R.id.button_back);
+        // Initialize UI elements
+        Fullname = findViewById(R.id.memberdetails_fullname);
+        Username = findViewById(R.id.memberdetails_username);
+        Email = findViewById(R.id.memberdetails_email);
+        PhoneNumber = findViewById(R.id.memberdetails_phone);
+        Back = findViewById(R.id.button_back);
 
-        SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs",MODE_PRIVATE);
-
+        // Retrieve member details from SharedPreferences
+        SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs", MODE_PRIVATE);
         String fullname = getSharedPrefs.getString("fullname", "nothing yet");
         String username = getSharedPrefs.getString("username", "nothing yet");
         String email = getSharedPrefs.getString("email", "nothing yet");
         String phone = getSharedPrefs.getString("phone", "nothing yet");
 
-
+        // Display member details on the UI
         Fullname.setText(fullname);
         Username.setText(username);
         Email.setText(email);
         PhoneNumber.setText(phone);
 
+        // Set listener for the back button
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MemberDetails.this,UserLandingPage.class);
+                // Navigate back to UserLandingPage
+                Intent intent = new Intent(MemberDetails.this, UserLandingPage.class);
                 startActivity(intent);
                 finish();
             }
         });
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -68,5 +71,4 @@ public class MemberDetails extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

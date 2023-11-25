@@ -6,10 +6,13 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class RoomType implements Parcelable {
-    // Fields
-    private int img;
-    private String name;
-    private String price;
+    private final int img; // Image resource ID for the room
+    private String name; // Room type name
+    private final String price; // Room price
+    private String date; // Selected date for booking
+    private final int availableRooms; // Number of available rooms
+
+    // Parcelable creator
     public static final Creator<RoomType> CREATOR = new Creator<RoomType>() {
         @Override
         public RoomType createFromParcel(Parcel in) {
@@ -21,9 +24,8 @@ public class RoomType implements Parcelable {
             return new RoomType[size];
         }
     };
-    private String date = "";
-    private int availableRooms = 0;
 
+    // Constructor
     public RoomType(int img, String name, String price, String date, int availableRooms) {
         this.img = img;
         this.name = name;
@@ -32,6 +34,7 @@ public class RoomType implements Parcelable {
         this.availableRooms = availableRooms;
     }
 
+    // Parcelable constructor
     protected RoomType(Parcel in) {
         img = in.readInt();
         name = in.readString();
@@ -40,21 +43,14 @@ public class RoomType implements Parcelable {
         availableRooms = in.readInt();
     }
 
+    // Getter and Setter methods for 'availableRooms'
     public int getAvailableRooms() {
         return availableRooms;
-    }
-
-    public void setAvailableRooms(int availableRooms) {
-        this.availableRooms = availableRooms;
     }
 
     // Getter and Setter methods for 'img'
     public int getImg() {
         return img;
-    }
-
-    public void setImg(int img) {
-        this.img = img;
     }
 
     // Getter and Setter methods for 'name'
@@ -71,10 +67,7 @@ public class RoomType implements Parcelable {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
+    // Getter and Setter methods for 'date'
     public String getDate() {
         return date;
     }
@@ -83,6 +76,7 @@ public class RoomType implements Parcelable {
         this.date = date;
     }
 
+    // Parcelable methods
     @Override
     public int describeContents() {
         return 0;
@@ -94,5 +88,6 @@ public class RoomType implements Parcelable {
         parcel.writeString(name);
         parcel.writeString(price);
         parcel.writeString(date);
+        parcel.writeInt(availableRooms);
     }
 }

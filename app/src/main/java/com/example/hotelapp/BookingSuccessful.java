@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BookingSuccessful extends AppCompatActivity {
 
-    private Button Home;
+    private Button homeButton;
     private TextView textViewBookingID;
 
     @Override
@@ -18,19 +18,20 @@ public class BookingSuccessful extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_successful);
 
-        Home = (Button) findViewById(R.id.button_home);
+        // Initialize views
+        homeButton = findViewById(R.id.button_home);
         textViewBookingID = findViewById(R.id.textView15);
-        textViewBookingID.setText("Congratulations !! Your Booking ID is #7997878");
+        textViewBookingID.setText("Congratulations!! Your Booking ID is #7997878");
 
-
-        Home.setOnClickListener(new View.OnClickListener() {
+        // Set up click listener for the home button
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Navigate to the UserLandingPage
                 Intent intent = new Intent(BookingSuccessful.this, UserLandingPage.class);
                 startActivity(intent);
-                finish();
+                finish(); // Close the current activity to prevent navigating back to it from UserLandingPage
             }
         });
-
     }
 }

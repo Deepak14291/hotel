@@ -1,25 +1,26 @@
-package com.example.hotelapp;
+package com.example.hotelapp.model;
 
 public class HotelServices {
 
-    int image;
+    // Fields
+    private int image;
     private String name;
     private String description;
 
+    // Constructor
     public HotelServices(int image, String name, String description) {
         this.image = image;
         this.name = name;
         this.description = description;
     }
 
+    // Getter and Setter methods for 'image'
     public int getImage() {
         return image;
     }
 
-    public void setImage(int image) {
-        this.image = image;
-    }
 
+    // Getter and Setter methods for 'name'
     public String getName() {
         return name;
     }
@@ -28,6 +29,7 @@ public class HotelServices {
         this.name = name;
     }
 
+    // Getter and Setter methods for 'description'
     public String getDescription() {
         return description;
     }
