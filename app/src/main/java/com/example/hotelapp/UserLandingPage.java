@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,10 +29,11 @@ public class UserLandingPage extends AppCompatActivity {
     private Button AboutHotel;
     private Button MemberDetails;
     private Button BookRoom;
-    private TextView Name,Place;
+    private TextView Name, Place;
     String[] mPermission = {Manifest.permission.ACCESS_FINE_LOCATION};
     private Button Media;
     private TrackGPS gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class UserLandingPage extends AppCompatActivity {
         SharedPreferences getSharedPrefs = getApplicationContext().getSharedPreferences("message_prefs", MODE_PRIVATE);
 
         String value = getSharedPrefs.getString("fullname", "nothing yet");
-        Name.setText("Hello " + value.toUpperCase()+",");
+        Name.setText("Hello " + value.toUpperCase() + ",");
 
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
@@ -59,11 +61,10 @@ public class UserLandingPage extends AppCompatActivity {
         }
 
 
-
         AboutHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserLandingPage.this,AboutHotelServices.class);
+                Intent intent = new Intent(UserLandingPage.this, AboutHotelServices.class);
                 startActivity(intent);
                 finish();
             }
@@ -74,7 +75,7 @@ public class UserLandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(UserLandingPage.this, HomeActivity.class);
                 startActivity(intent);
-
+                finish();
             }
         });
 
@@ -100,22 +101,26 @@ public class UserLandingPage extends AppCompatActivity {
     private void getLocation() {
         gps = new TrackGPS(UserLandingPage.this);
         if (gps.canGetLocation()) {
-
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-            try {
-                List<Address> listAddresses = geocoder.getFromLocation(gps.getLatitude(), gps.getLongitude(), 1);
-                if (null != listAddresses && listAddresses.size() > 0) {
-                    String _Location = listAddresses.get(0).getAddressLine(0);
-                    Place.setText(_Location + "");
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                try {
+                    List<Address> listAddresses = geocoder.getFromLocation(gps.getLatitude(), gps.getLongitude(), 1);
+                    if (null != listAddresses && listAddresses.size() > 0) {
+                        String _Location = listAddresses.get(0).getAddressLine(0);
+                        Place.setText(_Location + "");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                // Request location permission here
+                ActivityCompat.requestPermissions(UserLandingPage.this, mPermission, REQUEST_CODE_PERMISSION);
             }
-
         } else {
             gps.showAlert();
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -126,9 +131,18 @@ public class UserLandingPage extends AppCompatActivity {
                 // Permission granted, handle location retrieval here
                 getLocation();
             } else {
-                // Permission denied, handle accordingly
+                // Permission denied, show a user-friendly message
+                showPermissionDeniedMessage();
             }
         }
     }
 
+
+    private void showPermissionDeniedMessage() {
+        // Display a message to the user explaining why the location permission is essential
+        // and guide them on how to grant the permission.
+
+        // Example:
+        Toast.makeText(this, "Location permission is required to provide personalized services. Please grant the permission in the app settings.", Toast.LENGTH_LONG).show();
+    }
 }
