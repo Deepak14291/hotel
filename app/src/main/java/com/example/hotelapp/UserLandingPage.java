@@ -66,7 +66,7 @@ public class UserLandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(UserLandingPage.this, AboutHotelServices.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
@@ -84,7 +84,7 @@ public class UserLandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(UserLandingPage.this, MemberDetails.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
@@ -93,7 +93,7 @@ public class UserLandingPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(UserLandingPage.this, Media.class);
                 startActivity(intent);
-                finish();
+
             }
         });
     }
