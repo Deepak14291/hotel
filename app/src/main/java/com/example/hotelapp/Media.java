@@ -26,6 +26,10 @@ public class Media extends AppCompatActivity {
         setContentView(R.layout.activity_media);
 
         VideoView videoView = findViewById(R.id.videoView);
+        Button backBtn=findViewById(R.id.media_button_back);
+        backBtn.setOnClickListener(view -> {
+            finish();
+        });
         String mariottPath = "android.resource://" + getPackageName() + "/" + R.raw.mariottcommercial;
         String video2Path = "android.resource://" + getPackageName() + "/" + R.raw.video2;
 

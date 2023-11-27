@@ -4,7 +4,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hotelapp.model.Constants;
 import com.example.hotelapp.R;
 import com.example.hotelapp.home.adapter.RoomTypeAdapter;
+import com.example.hotelapp.model.Constants;
 import com.example.hotelapp.model.RoomType;
 
 import java.util.ArrayList;

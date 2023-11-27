@@ -40,15 +40,6 @@ public class UserLandingPage extends AppCompatActivity {
 
         String value = getSharedPrefs.getString("fullname", "nothing yet");
         name.setText("Hello " + value.toUpperCase() + ",");
-
-        if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(UserLandingPage.this, mPermission, REQUEST_CODE_PERMISSION);
-            return;
-        } else {
-            getLocation();
-        }
-
-
         aboutHotel.setOnClickListener(v -> {
             Intent intent = new Intent(UserLandingPage.this, AboutHotelServices.class);
             startActivity(intent);
@@ -58,7 +49,7 @@ public class UserLandingPage extends AppCompatActivity {
         bookRoom.setOnClickListener(v -> {
             Intent intent = new Intent(UserLandingPage.this, HomeActivity.class);
             startActivity(intent);
-            finish();
+           
         });
 
         memberDetails.setOnClickListener(v -> {
@@ -72,6 +63,15 @@ public class UserLandingPage extends AppCompatActivity {
             startActivity(intent);
 
         });
+        if (checkSelfPermission(mPermission[0]) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(UserLandingPage.this, mPermission, REQUEST_CODE_PERMISSION);
+            return;
+        } else {
+            getLocation();
+        }
+
+
+
     }
 
     private void getLocation() {
