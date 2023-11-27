@@ -2,7 +2,6 @@ package com.example.hotelapp;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,66 +15,64 @@ public class Media extends AppCompatActivity {
 
     private Button playVideo;
     private MediaPlayer mediaPlayer;
-
     private Button playMusic;
-
-    private Button Back;
+    private int currentSongIndex = 0;
+    private int[] songs = {R.raw.aboutfood, R.raw.music1, R.raw.music2, R.raw.music4, R.raw.music5};
+    private boolean isFirstVideoCompleted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media);
 
-        // Initialize video view and set its path
         VideoView videoView = findViewById(R.id.videoView);
-        String videopath = "android.resource://" + getPackageName() + "/" + R.raw.mariottcommercial;
-        Uri uri = Uri.parse(videopath);
-        videoView.setVideoPath(uri.toString());
+        String mariottPath = "android.resource://" + getPackageName() + "/" + R.raw.mariottcommercial;
+        String video2Path = "android.resource://" + getPackageName() + "/" + R.raw.video2;
 
-        // Set up action bar
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        Uri mariottUri = Uri.parse(mariottPath);
+        Uri video2Uri = Uri.parse(video2Path);
 
-        // Set media controller for video view
+        videoView.setVideoURI(mariottUri);
+        videoView.start();
+
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
 
-        // Initialize media player for music
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.aboutfood);
-
-        // Initialize UI elements
-        playMusic = findViewById(R.id.button_food);
-        Back = findViewById(R.id.media_button_back);
-
-        // Set listeners for buttons
-        playMusic.setOnClickListener(new View.OnClickListener() {
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
-            public void onClick(View v) {
-                if (mediaPlayer.isPlaying()) {
-                    // Stop and give option to start again
-                    pauseMusic();
-                } else {
-                    // Start and give option to pause again
-                    startMusic();
+            public void onCompletion(MediaPlayer mp) {
+                if (!isFirstVideoCompleted) {
+                    videoView.setVideoURI(video2Uri);
+                    videoView.start();
+                    isFirstVideoCompleted = true;
                 }
             }
         });
 
-        Back.setOnClickListener(new View.OnClickListener() {
+        // Playing music.
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), songs[currentSongIndex]);
+
+        playMusic = findViewById(R.id.button_food);
+
+        playMusic.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                // Navigate back to UserLandingPage
-                Intent intent = new Intent(Media.this, UserLandingPage.class);
-                startActivity(intent);
-                finish();
+
+                if (mediaPlayer.isPlaying()){
+
+                    //stop and give option to start again
+                    pauseMusic();
+                }else {
+
+                    //Start and give option to pause again
+                    startMusic();
+                }
             }
         });
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -86,7 +83,7 @@ public class Media extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Pause the music playback
+
     public void pauseMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
@@ -94,17 +91,24 @@ public class Media extends AppCompatActivity {
         }
     }
 
-    // Start or resume the music playback
     public void startMusic() {
         if (mediaPlayer != null) {
             mediaPlayer.start();
             playMusic.setText("Pause");
+
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    playMusic.setText("Play");
+                    playNextSong();
+                }
+            });
         }
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                playMusic.setText("Play");
-            }
-        });
+    }
+
+    private void playNextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        mediaPlayer.reset();
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), songs[currentSongIndex]);
     }
 }
